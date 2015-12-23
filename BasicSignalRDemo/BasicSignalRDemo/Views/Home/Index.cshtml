@@ -6,9 +6,9 @@
 }
 
 <div class="container">
-    <h1>SignalR</h1> 
+    <h1>SignalR</h1>
     <input type="text" id="message" />
-    <input type="button" id="sendmessage" value="Send" class="" class="btn btn-primary btn-lg" />
+    <input type="button" id="sendmessage" value="Send" class="btn btn-primary btn-lg" />
     <input type="hidden" id="displayname" />
     <ul id="discussion">
     </ul>
@@ -18,7 +18,7 @@
 {
     <script src="Scripts/jquery.signalR-2.2.0.min.js"></script>
     <script src="signalr/hubs"></script>
-    <script type="text/javascript">
+     <script type="text/javascript">
         $(function () {
             var chat = $.connection.chatHub;
             chat.client.broadcastMessage = function (name, message) {
@@ -36,4 +36,21 @@
             });
         });
     </script>
+  @*  <script>
+        $(function () {
+            var chat = $.connection.chatHub;
+            chat.client.broadcastMessage = function (name, message) {
+                $("#discussion").append("<li>") + name + "---" + message + "</li>";
+            }
+            $("#displayname").val(prompt('enter name : ', ''));
+            $("#message").focus();
+            $.connection.hub.start().done(function () {
+                $('#sendmessage').click(function () {
+                    chat.server.send($('#displayname').val(), $('#message').val());
+                    $('#message').val('').focus();
+                });
+            });
+        });
+
+    </script>*@
 }
